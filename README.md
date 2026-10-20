@@ -1,106 +1,140 @@
 # 8-bit to 4-bit Converter
 
-## Overview
-
-This project implements an **8-bit to 4-bit converter (multiplexer-based data selector)** using Verilog HDL. The design selects either the upper nibble (`din[7:4]`) or lower nibble (`din[3:0]`) of an 8-bit input based on a select signal.
-
-The project also includes the complete ASIC physical design flow, from RTL design to signoff, with screenshots and results from each implementation stage.
+This project implements an **8-bit to 4-bit Converter** using Verilog HDL. The circuit selects either the upper nibble or lower nibble  of an 8-bit input word based on a single-bit select signal.
+In addition to RTL design and functional verification, the complete **ASIC Physical Design Flow** has been carried out, including synthesis, floorplanning, power planning, placement, clock tree synthesis (CTS), routing, and signoff.
 
 ---
 
-## Design Specification
+## Design Specifications
 
 ### Inputs
-- `din[7:0]` : 8-bit input data
-- `sel` : Select signal
+
+| Signal | Width | Description |
+|----------|----------|-------------|
+| din | 8-bit | Input data |
+| sel | 1-bit | Selection signal |
 
 ### Output
-- `dout[3:0]` : 4-bit output data
 
-### Functionality
+| Signal | Width | Description |
+|----------|----------|-------------|
+| dout | 4-bit | Selected 4-bit output |
+
+---
+
+## Functional Description
+
+The converter outputs one of the two 4-bit nibbles from the 8-bit input.
 
 | sel | Output |
-|------|---------|
-| 0 | `din[7:4]` |
-| 1 | `din[3:0]` |
+|------|--------|
+| 0 | din[3:0] |
+| 1 | din[7:4] |
 
-### Verilog Logic
+### RTL Implementation
 
 ```verilog
-assign dout = sel ? din[3:0] : din[7:4];
+assign dout = sel ? din[7:4] : din[3:0];
 ```
 
 ---
 
-## Simulation
+## Test Cases
 
-### Test Cases
+| Input (din) | sel | Output (dout) |
+|-------------|-----|---------------|
+| 10110100 | 1 | 1011 |
+| 10110100 | 0 | 0100 |
+| 11001010 | 1 | 1100 |
+| 11001010 | 0 | 1010 |
 
-| Input (din) | sel | Expected Output |
-|------------|-----|----------------|
-| 10110100 | 1 | 0100 |
-| 10110100 | 0 | 1011 |
-| 11001010 | 1 | 1010 |
-| 11001010 | 0 | 1100 |
-
-### Waveform Result
-
-The simulation waveform verifies the correct selection of the upper and lower 4-bit portions of the 8-bit input according to the select signal.
-
-![Simulation](Simulation/Xcelium.png)
+The simulation waveform confirms correct operation for all test cases.
 
 ---
 
 ## ASIC Physical Design Flow
 
-This project demonstrates the complete RTL-to-GDSII flow.
+### 1. RTL Design
+The circuit functionality is described using Verilog HDL.
 
-### 1. Synthesis
-Converts RTL Verilog code into a gate-level netlist and generates timing reports.
+### 2. Functional Simulation
+The design is verified using a dedicated testbench and simulated to ensure correct functionality.
 
-### 2. Floorplanning
-Defines the chip layout boundary, core area, and placement regions.
+### 3. Synthesis
+RTL code is transformed into a gate-level netlist while satisfying design constraints.
 
-### 3. Power Planning
-Creates VDD and VSS power distribution networks.
+### 4. Floorplanning
+The chip boundary, core area, and placement regions are defined.
 
-### 4. Placement
-Places standard cells within the floorplan.
+### 5. Power Planning
+Power rings and power distribution networks are created to ensure reliable power delivery.
 
-### 5. Clock Tree Synthesis (CTS)
-Builds a clock distribution network while minimizing clock skew.
+### 6. Placement
+Standard cells are optimally placed within the floorplan.
 
-### 6. Routing
-Connects all placed cells according to the netlist.
+### 7. Clock Tree Synthesis (CTS)
+A balanced clock distribution network is generated to reduce clock skew and insertion delay.
 
-### 7. Signoff
-Performs final verification including timing, DRC, and LVS checks.
+### 8. Routing
+Physical interconnections between placed cells are established.
+
+### 9. Signoff
+Final verification is performed to ensure the design is ready for fabrication.
 
 ---
 
 ## Tools Used
 
+### Hardware Description
 - Verilog HDL
+
+### Functional Verification
 - Cadence Xcelium
+
+### Logic Synthesis
 - Cadence Genus
+
+### Physical Design and Signoff
 - Cadence Innovus
+  - Floorplanning
+  - Power Planning
+  - Placement
+  - Clock Tree Synthesis (CTS)
+  - Routing
+  - Signoff Verification
+
+### Platform
+- Linux
 
 ---
 
 ## Results
 
-- Functional verification completed successfully.
-- Correct 8-bit to 4-bit data selection achieved.
-- RTL-to-GDSII implementation flow completed.
-- Timing requirements satisfied after physical design and signoff.
+ Successful RTL design implementation
 
----
+ Functional verification completed using Xcelium
+
+ Synthesis completed using Cadence Genus
+
+ Floorplanning completed successfully
+
+ Power planning completed successfully
+
+ Placement completed successfully
+
+ Clock Tree Synthesis (CTS) completed
+
+ Routing completed successfully
+
+ Signoff stage completed successfully
+
+ End-to-end RTL-to-GDSII flow demonstrated
+
 
 ## Author
 
-**Sency Antony**
-
+**Sency Antony**  
 B.Tech Electronics Engineering with VLSI Design and Technology
-Government Model Engineering College
+Model Engineering College, Thrikkakara
 
 GitHub: https://github.com/SencyAntony
