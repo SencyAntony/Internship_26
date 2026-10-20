@@ -134,7 +134,9 @@ Final verification is performed to ensure the design is ready for fabrication.
 ## Author
 
 **Sency Antony**  
-B.Tech Electronics Engineering with VLSI Design and Technology
-Model Engineering College, Thrikkakara
 
-GitHub: https://github.com/SencyAntony
+B.Tech Electronics Engineering with VLSI Design and Technology
+
+Government Model Engineering College, Thrikkakara
+
+
