@@ -13,24 +13,21 @@ module coverter_tb;
     );
     initial clk = 0;
     always #5 clk = ~clk;   
-    initial begin
-        din = 8'b10110100;
-        sel = 1;
-        #10;
-        $display("Test1 | sel=%b | din=%b | dout=%b | expected=%b", sel, din, dout, din[3:0]);
-        sel = 0;
-        #10;
-        $display("Test2 | sel=%b | din=%b | dout=%b | expected=%b", sel, din, dout, din[7:4]);
+initial begin
+    din = 8'b10110100;
+    sel = 1;
+    #10;
 
-       
-        din = 8'b11001010;
-        sel = 1;
-        #10;
-        $display("Test3 | sel=%b | din=%b | dout=%b | expected=%b", sel, din, dout, din[3:0]);
-        sel = 0;
-        #10;
-        $display("Test4 | sel=%b | din=%b | dout=%b | expected=%b", sel, din, dout, din[7:4]);
-      
-        $finish;
-    end
+    sel = 0;
+    #10;
+
+    din = 8'b11001010;
+    sel = 1;
+    #10;
+
+    sel = 0;
+    #10;
+
+    $finish;
+end
 endmodule
