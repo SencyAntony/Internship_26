@@ -31,11 +31,6 @@ The converter outputs one of the two 4-bit nibbles from the 8-bit input.
 | 0 | din[3:0] |
 | 1 | din[7:4] |
 
-### RTL Implementation
-
-```verilog
-assign dout = sel ? din[7:4] : din[3:0];
-```
 
 ---
 
